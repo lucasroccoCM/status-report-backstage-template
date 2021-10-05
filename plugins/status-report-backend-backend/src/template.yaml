@@ -1,0 +1,41 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+# some metadata about the template itself
+metadata:
+  name: v1beta2-demo
+  title: Status Report Action template
+  description: Status Report Template para criação de projeto no Azure Devops + Webhook com Logic App
+spec:
+  owner: backstage/techdocs-core
+  type: service
+
+  # these are the steps which are rendered in the frontend with the form input
+  parameters:
+    - title: Informe os campos requeridos
+      required:
+        - name
+        - description
+      properties:
+        name:
+          title: Nome do Projeto
+          type: string
+          description: Nome do projeto que será criado no Azure Devops
+          ui:autofocus: true
+          ui:options:
+            rows: 5    
+        description:
+          title: Descrição do Projeto
+          type: string
+          description: Descrição do objetivo do projeto
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+
+  # here's the steps that are executed in series in the scaffolder backend
+  steps:
+    - id: create-team-project
+      name: Creates Azure Devops Team Project
+      action: mycompany:create-team-project
+      input:
+        name: '{{ parameters.name }}'
+        description: '{{ parameters.description }}'
