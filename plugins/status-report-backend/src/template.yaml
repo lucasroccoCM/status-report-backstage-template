@@ -27,8 +27,7 @@ spec:
         description:
           title: Descrição do Projeto
           type: string
-          description: Descrição do objetivo do projeto
-          ui:autofocus: true
+          description: Descrição do objetivo do projeto          
           ui:options:
             rows: 5
         pat:
