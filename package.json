@@ -54,5 +54,6 @@
     "transformModules": [
       "@asyncapi/react-component"
     ]
-  }
+  },
+  "dependencies": {}
 }

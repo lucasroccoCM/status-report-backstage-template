@@ -16,6 +16,7 @@
 
 import { errorHandler } from '@backstage/backend-common';
 import express from 'express';
+import { response } from 'express';
 import Router from 'express-promise-router';
 import { Logger } from 'winston';
 
@@ -33,24 +34,18 @@ export async function createRouter(
   const router = Router();
   router.use(express.json());
 
-  // router.get('/statusreportbackend', (_, response) => {
-  //   logger.info('PONG!');
-  //   response.send({ status: 'ok' });
-  // });
-
   router.use('/createteamproject', async (request, response) => {
 
     const createProjectResponse = await azdevops.createTeamProject({
       Name: request.body.name,
-      Description: request.body.description,
-      Pat: request.body.pat,
+      Description: request.body.description      
     });
 
-    logger.info(`Team Project Name: ${request.body.Name}, Team Project Description: ${request.body.Description}`);
+    logger.info(`Team Project Name: ${request.body.name}, Team Project Description: ${request.body.description}`);
     
     response.send(createProjectResponse);
 
-  });
+  });  
 
   router.use(errorHandler());
   return router;

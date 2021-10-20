@@ -23,6 +23,7 @@ backend:
   cache:
     store: memory
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
+  logicAppUrl: https://prod-28.eastus.logic.azure.com/workflows/69c4e595f7404a5babd1d5320cb91d19/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZUNrBP3ulSetS5bJLXWFyXuIRkC2EgV56zxSJfUsADI
 
 integrations:
   github:

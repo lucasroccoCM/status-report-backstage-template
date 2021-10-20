@@ -1,7 +1,8 @@
+import { Config } from '@backstage/config';
 import { createTemplateAction } from '@backstage/plugin-scaffolder-backend';
-import { createTeamProject } from '@internal/plugin-status-report-backend';
+import { createTeamProject, initialize } from '@internal/plugin-status-report-backend';
 
-export const CreateTeamProjectAction = () => {
+export const CreateTeamProjectAction = (config:Config) => {
     return createTemplateAction<{ name: string, description: string, pat: string }>({
         id: 'mycompany:create-team-project',
         schema: {
@@ -31,10 +32,13 @@ export const CreateTeamProjectAction = () => {
             
             ctx.logStream.write(`Team Project Name: ${ctx.input.name}, Team Project Description: ${ctx.input.description}`);            
             
+            process.env.AZURE_PERSONAL_ACCESS_TOKEN = ctx.input.pat;
+
+            await initialize(config);
+
             await createTeamProject({
                 Name: ctx.input.name,
-                Description: ctx.input.description,
-                Pat: ctx.input.pat
+                Description: ctx.input.description                
             });
         },
     });

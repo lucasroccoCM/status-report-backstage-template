@@ -17,7 +17,7 @@ export default async function createPlugin({
   const containerRunner = new DockerContainerRunner({ dockerClient });
   const catalogClient = new CatalogClient({ discoveryApi: discovery });
 
-  const actions = [CreateTeamProjectAction()];
+  const actions = [CreateTeamProjectAction(config)];
 
   return await createRouter({
     containerRunner,
